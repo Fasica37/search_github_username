@@ -12,20 +12,74 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController _searchController = TextEditingController();
   @override
   void didChangeDependencies() async {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    await Provider.of<UserProvider>(context, listen: false).fetchUser();
   }
+
+  Future<void> _search() async {
+    await Provider.of<UserProvider>(context, listen: false)
+        .fetchUser(_searchController.text);
+  }
+
+  final _outlineInputBorder = const OutlineInputBorder();
+  final _contentPadding =
+      const EdgeInsets.symmetric(vertical: 0, horizontal: 10);
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(),
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: size.width * 0.6,
+                child: TextFormField(
+                  controller: _searchController,
+                  textInputAction: TextInputAction.next,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: InputDecoration(
+                    contentPadding: _contentPadding,
+                    border: _outlineInputBorder,
+                    prefixIcon: Icon(Icons.search),
+                  ),
+
+                  // validator: (val) {
+                  //   if (val.toString().isEmpty && txt != 'Tag') {
+                  //     return '$txt is required';
+                  //   } else if ((txt == 'Tag') && (tags.isEmpty)) {
+                  //     return 'tag is required';
+                  //   }
+                  //   return null;
+                  // },
+                  // onChanged: (value) {
+                  //   setState(() {});
+                  // },
+                  // onSaved: (value) {
+
+                  // },
+                ),
+              ),
+              Container(
+                width: size.width * 0.3,
+                child: ElevatedButton(
+                  child: Text('Search'),
+                  onPressed: _search,
+                ),
+              )
+            ],
+          )
+        ]),
+      ),
     );
   }
 }
