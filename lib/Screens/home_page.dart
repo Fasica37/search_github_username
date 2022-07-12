@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // ),
       body: SafeArea(
         child: Container(
-          color: Colors.blueGrey[800],
+          // color: Colors.blueGrey[800],
           padding: EdgeInsets.all(10),
           child: Column(children: [
             Row(
@@ -67,21 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         Icons.search,
                       ),
                     ),
-
-                    // validator: (val) {
-                    //   if (val.toString().isEmpty && txt != 'Tag') {
-                    //     return '$txt is required';
-                    //   } else if ((txt == 'Tag') && (tags.isEmpty)) {
-                    //     return 'tag is required';
-                    //   }
-                    //   return null;
-                    // },
-                    // onChanged: (value) {
-                    //   setState(() {});
-                    // },
-                    // onSaved: (value) {
-
-                    // },
                   ),
                 ),
                 Container(
@@ -129,12 +114,91 @@ class _MyHomePageState extends State<MyHomePage> {
                                       Text('Joined ${_userInfo['created_at']}')
                                     ],
                                   ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
                                   Text(
                                     _userInfo['login'],
                                     style: TextStyle(
                                       color: Colors.blue,
                                     ),
-                                  )
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(_userInfo['bio'] == null
+                                      ? 'This repo no bio'
+                                      : _userInfo['bio']),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Container(
+                                      color: Colors.grey,
+                                      width: size.width * 0.7,
+                                      height: size.height * 0.1,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text('Repos'),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                _userInfo['public_repos']
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text('Followers'),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                _userInfo['followers']
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text('Following'),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                _userInfo['following']
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ))
                                 ],
                               ),
                             ]),
